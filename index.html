@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Formulaire</title>
+
+<style>
+    .error {
+        color: red;
+        font-size: 13px;
+    }
+</style>
+
+</head>
+<body>
+
+<h2>Formulaire d'inscription</h2>
+
+<form id="form">
+
+    <label>Nom :</label><br>
+    <input type="text" id="nom">
+    <span id="errNom" class="error"></span><br><br>
+
+    <label>Prénom :</label><br>
+    <input type="text" id="prenom">
+    <span id="errPrenom" class="error"></span><br><br>
+
+    <label>Email :</label><br>
+    <input type="text" id="email">
+    <span id="errEmail" class="error"></span><br><br>
+
+    <label>Mot de passe :</label><br>
+    <input type="password" id="password">
+    <span id="errPassword" class="error"></span><br><br>
+
+    <label>Date de naissance :</label><br>
+    <input type="date" id="date">
+    <span id="errDate" class="error"></span><br><br>
+
+    <label>Genre :</label><br>
+    <input type="radio" name="genre" value="Homme"> Homme
+    <input type="radio" name="genre" value="Femme"> Femme
+    <span id="errGenre" class="error"></span><br><br>
+
+    <label>Ville :</label><br>
+    <select id="ville">
+        <option value="">-- Choisir une ville --</option>
+        <option>Marrakech</option>
+        <option>Casablanca</option>
+        <option>Rabat</option>
+    </select>
+    <span id="errVille" class="error"></span><br><br>
+
+    <label>
+        <input type="checkbox" id="conditions">
+        J'accepte les conditions
+    </label>
+    <span id="errCond" class="error"></span><br><br>
+
+    <button type="submit">S'inscrire</button>
+    <button type="reset">Annuler</button>
+
+</form>
+
+<script src="script.js"></script>
+
+</body>
+</html>
