@@ -3,14 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Formulaire</title>
-
-<style>
-    .error {
-        color: red;
-        font-size: 13px;
-    }
-</style>
-
 </head>
 <body>
 
@@ -19,49 +11,68 @@
 <form id="form">
 
     <label>Nom :</label><br>
-    <input type="text" id="nom">
-    <span id="errNom" class="error"></span><br><br>
+    <input type="text" id="nom" name="nom">
+    <span id="errNom" ></span><br><br>
 
     <label>Prénom :</label><br>
-    <input type="text" id="prenom">
-    <span id="errPrenom" class="error"></span><br><br>
+    <input type="text" id="prenom" name="prenom">
+    <span id="errPrenom" ></span><br><br>
 
     <label>Email :</label><br>
-    <input type="text" id="email">
-    <span id="errEmail" class="error"></span><br><br>
+    <input type="email" id="email" name="email">
+    <span id="errEmail" ></span><br><br>
 
     <label>Mot de passe :</label><br>
-    <input type="password" id="password">
-    <span id="errPassword" class="error"></span><br><br>
+    <input type="password" id="password" name="password" minlength="6">
+    <span id="errPassword" ></span><br><br>
 
     <label>Date de naissance :</label><br>
-    <input type="date" id="date">
-    <span id="errDate" class="error"></span><br><br>
+    <input type="date" id="date" name="date">
+    <span id="errDate"></span><br><br>
 
     <label>Genre :</label><br>
     <input type="radio" name="genre" value="Homme"> Homme
     <input type="radio" name="genre" value="Femme"> Femme
-    <span id="errGenre" class="error"></span><br><br>
+    <span id="errGenre" ></span><br><br>
 
     <label>Ville :</label><br>
-    <select id="ville">
+    <select id="ville" name="ville">
         <option value="">-- Choisir une ville --</option>
         <option>Marrakech</option>
         <option>Casablanca</option>
         <option>Rabat</option>
     </select>
-    <span id="errVille" class="error"></span><br><br>
+    <span id="errVille"></span><br><br>
 
     <label>
         <input type="checkbox" id="conditions">
         J'accepte les conditions
     </label>
-    <span id="errCond" class="error"></span><br><br>
+    <span id="errCond" ></span><br><br>
 
-    <button type="submit">S'inscrire</button>
+    <button type="submit" id="btn">S'inscrire</button>
     <button type="reset">Annuler</button>
 
 </form>
+
+<table>
+    <thead>
+        <th>Nom </th>
+        <th>Prenom </th>
+        <th>Email </th>
+        <th>Password </th>
+        <th>Date de naissance</th>
+        <th>Genre </th>
+        <th>Ville</th>
+        <th>Conditons </th>
+    </thead>
+    <tbody id="table_body">
+
+    </tbody>
+</table>
+
+
+<div id="affichage"></div>
 
 <script src="script.js"></script>
 
