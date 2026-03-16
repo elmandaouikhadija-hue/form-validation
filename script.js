@@ -19,184 +19,118 @@ let errGenre = document.getElementById("errGenre");
 let errCond = document.getElementById("errCond");
 
 
-function verifier(input, err){
+nom.addEventListener('keyup',()=>validerInput(nom,errNom,"le nom est obligatoire !!"))
+prenom.addEventListener('keyup',()=>validerInput(prenom,errPrenom,"le prenom est obligatoire !!"))
+email.addEventListener('keyup',()=>validerInput(email,errEmail,"l'email est obligatoire !!"))
+password.addEventListener('keyup',()=>validerInput(password,errPassword,"le password est obligatoire !!"))
+date.addEventListener('change',()=>validerInput(date,errDate,"la date est obligatoire !!"))
+ville.addEventListener('change',()=>validerInput(ville,errVille,"la ville est obligatoire !!"))
+genre.forEach(g=>{
+    g.addEventListener('change', validerGenre)
+})
+conditions.addEventListener('change', validerConditions)
 
-    if(input.value.trim() == ""){
-        err.innerHTML = "Champ obligatoire";
-        input.style.border = "2px solid red";
-    }
-    else{
-        err.innerHTML = "";
-        input.style.border = "2px solid green";
-    }
+// validation de genre
+function validerGenre(){
+    let selected = false;
 
-}
-
-// nom
-nom.addEventListener("blur", function(){
-    verifier(nom,errNom);
-});
-
-// prenom
-prenom.addEventListener("blur", function(){
-    verifier(prenom,errPrenom);
-});
-
-// date
-date.addEventListener("blur", function(){
-    verifier(date,errDate);
-});
-
-// ville
-ville.addEventListener("blur", function(){
-    verifier(ville,errVille);
-});
-
-// email
-email.addEventListener("blur", function(){
-    let valeur = email.value.trim(); 
-
-    if(valeur == ""){
-        errEmail.innerHTML = "Email obligatoire";
-        email.style.border = "2px solid red";
-    }
-
-    else if(valeur.indexOf("@") === -1 || valeur.indexOf(".") === -1){
-        errEmail.innerHTML = "Email invalide";
-        email.style.border = "2px solid red";
-    }
-    
-    else{
-        errEmail.innerHTML = "";
-        email.style.border = "2px solid green";
-    }
-});
-
-// password
-password.addEventListener("blur", function(){
-
-    if(password.value.length < 6){
-        errPassword.innerHTML="Min 6 caractères";
-        password.style.border="2px solid red";
-    }
-    else{
-        errPassword.innerHTML="";
-        password.style.border="2px solid green";
-    }
-
-});
-
-// genre
-function verifierGenre(){
-    let choix = false;
-    for(let i=0; i<genre.length; i++){
-        if(genre[i].checked){
-            choix = true;
+    genre.forEach(g=>{
+        if(g.checked){
+            selected = true;
         }
-    }
-    if(!choix){
-        errGenre.innerHTML = "Choisir un genre";
-    } else {
-        errGenre.innerHTML = "";
-    }
-}
+    });
 
-
-// conditions
-conditions.addEventListener("change", function(){
-
-    if(!conditions.checked){
-        errCond.innerHTML="Accepter les conditions";
-    }
-    else{
-        errCond.innerHTML="";
-    }
-
-});
-
-// validation submit
-
-form.addEventListener("submit", function(e){
-
-    let valid = true;
-
-    if(nom.value.trim() === ""){
-        errNom.innerText = "Nom obligatoire !";
-        nom.style.border = "2px solid red";
-        valid = false;
-    }else{errNom.innerText=""}
-
-    if(prenom.value.trim() === ""){
-        errPrenom.innerText = "Prénom obligatoire !";
-        prenom.style.border = "2px solid red";
-        valid = false;
-    }else{errPrenom.innerText=""}
-
-    if(email.value.trim() === ""){
-        errEmail.innerText = "Email obligatoire !";
-        email.style.border = "2px solid red";
-        valid = false;
-    }else{errEmail.innerText=""}
-
-    if(password.value.trim() === ""){
-        errPassword.innerText = "Mot de passe obligatoire !";
-        password.style.border = "2px solid red";
-        valid = false;
-    }else{errPassword.innerText=""}
-
-    // date
-    if(date.value.trim() === ""){
-        errDate.innerText = "Date obligatoire !";
-        date.style.border = "2px solid red";
-        valid = false;
+    if(!selected){
+        errGenre.textContent = "le genre est obligatoire !!";
+        errGenre.style.color = "red";
     }else{
-        errDate.innerText = "";
+        errGenre.textContent = "";
     }
+}
 
-    // genre
-    let choix = false;
-    for(let i=0; i<genre.length; i++){
-        if(genre[i].checked){
-            choix = true;
-        }
-    }
-
-    if(!choix){
-        errGenre.innerText = "Choisir un genre !";
-        valid = false;
-    } else { 
-        errGenre.innerText = ""; 
-    }
-
-    // ville
-    if(ville.value === ""){
-        errVille.innerText = "Choisir une ville !";
-        valid = false;
-    } else { 
-        errVille.innerText = ""; 
-    }
-
-    // conditions
+// checkbox validaation
+function validerConditions(){
     if(!conditions.checked){
-        errCond.innerText = "Accepter les conditions !";
-        valid = false;
-    } else { 
-        errCond.innerText = ""; 
+        errCond.textContent = "les conditions sont obligatoires !!";
+        errCond.style.color="red";
+    }else{
+        errCond.textContent="";
     }
+}
 
-    if(!valid){
-        e.preventDefault();
+// input validition
+function validerInput(input,err,message){
+    if(input.value.trim()===""){
+        err.textContent = message;
+        err.style.color="red";
     }
-
-    // console
-    if(valid){
-        console.log("Nom:", nom.value);
-        console.log("Prénom:", prenom.value);
-        console.log("Email:", email.value);
-        console.log("Password:", password.value);
-        console.log("Date:", date.value);
-        console.log("Ville:", ville.value);
-        console.log("Conditions acceptées:", conditions.checked);
+    else{
+        err.textContent = "";
     }
+}
 
-});
+// les donnees des utilisateurs
+var btn_inscrire=document.getElementById("btn");
+var table_tbody=document.getElementById("table_body");
+
+var Utilisateurs=[]
+
+btn_inscrire.addEventListener('click' , ajouter)
+
+function ajouter(e){
+    e.preventDefault();
+
+
+    //  genre choisi
+    let genreValue = "";
+
+    genre.forEach(g=>{
+        if(g.checked){
+            genreValue = g.value;
+        }
+    });
+
+
+    var user= {
+       nom: nom.value,
+        prenom: prenom.value,
+        email: email.value,
+        password: password.value,
+        date: date.value,
+        ville: ville.value,
+        genre: genreValue,
+        conditions: conditions.checked
+
+    }
+    Utilisateurs.push(user);
+
+    affichage();
+
+    form.reset();
+    
+}
+
+// affichage du formulaire
+function affichage(){
+    table_tbody.innerHTML="";
+
+  Utilisateurs.forEach(function(x){
+
+        let table_ligne = `<tr>
+            <td>${x.nom}</td>
+            <td>${x.prenom}</td>
+            <td>${x.email}</td>
+            <td>${x.password}</td>
+            <td>${x.date}</td>
+            <td>${x.ville}</td>
+            <td>${x.genre}</td>
+        </tr>`;
+
+        table_tbody.insertAdjacentHTML("beforeend",table_ligne);
+
+    })
+}
+
+
+
+
